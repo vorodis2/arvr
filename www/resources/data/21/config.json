@@ -1,0 +1,99 @@
+{
+    "id": 21,
+    "title": 21,
+    "key": "o_21",
+    "orig": "xz.png",
+    "mod": {
+        "key": "glb",
+        "name": "ddivan.glb"
+    },
+    "filt": [],
+    "param": {
+        "tOt": true,
+        "tNa": true,
+        "rO": -1,
+        "kesh": false,
+        "sG": false,
+        "clone": true
+    },
+    "resurs": {
+        "array": [
+            {
+                "name": "31_128.png",
+                "size": 1,
+                "b": false,
+                "i": "iz",
+                "i1": "[0,0,0,0,0,0,0,0,0,0,0,0,{|visible|:true,|sah|:12},0]"
+            },
+            {
+                "name": "87_128.png",
+                "size": 1,
+                "b": false,
+                "i": "iz",
+                "i1": "[0,0,0,0,0,0,0,0,0,0,0,{|visible|:true,|sah|:11},{|visible|:false,|sah|:12},{|visible|:true,|sah|:13}]"
+            },
+            {
+                "name": "73_128.png",
+                "size": 1,
+                "b": false,
+                "i": "iz",
+                "i1": "[0,0,0,0,0,0,0,0,0,0,0,{|visible|:true,|sah|:11},{|visible|:false,|sah|:12},{|visible|:false,|sah|:13}]"
+            },
+            {
+                "name": "69_128.png",
+                "size": 1,
+                "b": false,
+                "i": "iz1",
+                "i1": "[0,{|visible|:true,|sah|:1},0,0,0,0,{|visible|:true,|sah|:6},0,0,0,0,0,0,0]"
+            },
+            {
+                "name": "84_128.png",
+                "size": 1,
+                "b": false,
+                "i": "iz1",
+                "i1": "[0,{|visible|:true,|sah|:1},0,0,0,0,{|visible|:false,|sah|:6},0,0,0,0,0,0,0]"
+            }
+        ]
+    },
+    "iz": {
+        "a": true,
+        "st": false,
+        "str": "[0,0,{|material|:|m_12|,|sah|:2},{|material|:|m_12|,|sah|:3},{|material|:|m_12|,|sah|:4},{|material|:|m_12|,|sah|:5},0,{|material|:|m_12|,|sah|:7},{|material|:|m_12|,|sah|:8},{|material|:|m_12|,|sah|:9},{|material|:|m_12|,|sah|:10},{|material|:|m_3|,|sah|:11},{|material|:|m_3|,|sah|:12},{|material|:|m_3|,|sah|:13}]"
+    },
+    "iNum": {
+        "rect": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "rect1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "bool": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "num": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "str": [
+            "0",
+            "0",
+            "0",
+            "0"
+        ]
+    }
+}

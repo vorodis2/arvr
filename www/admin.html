@@ -1,0 +1,186 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>админ</title>	
+<script src='common/AppLoader.js'></script>
+<script src='src/lib/jquery-1.11.3.js'></script>
+
+<script>
+	var trace = window.console.log.bind(window.console);
+	var dcmParam;	
+	var appLoader;
+	var path="src/";
+	
+	var plus="";
+	var sahBig=-1;
+
+	var manifest = [
+		{src: path + 'libMy/divLib.js' + plus},
+
+		//{src: path + 'lib/jquery-1.11.3.js' + plus},
+		{src: path + 'lib/pixi.js' + plus},	
+		{src: path + 'lib/pixi.js' + plus},		
+		{src: path + 'lib/pixi/filters/pixi-extra-filters.js' + plus},
+
+
+		{src: path + 'localStorage/LocalStorage.js' + plus},
+
+		
+		//{src: path + 'lib/three99.js' + plus},
+		{src: path + 'lib/three.min.js' + plus},
+		//{src: path + 'lib/shader/ShaderAll.js' + plus},
+		{src: path + 'lib/tween.min.js' + plus},
+		//{src: path + 'lib/loaders/TDSLoader.js' + plus},
+		{src: path + 'lib/loaders/inflate.min.js' + plus},
+		/*{src: path + 'lib/loaders/FBXLoader.js' + plus},
+		
+		{src: path + 'lib/loaders/RGBELoader.js' + plus},*/
+
+
+		{src: path + 'lib/loaders/GLTFLoader.js' + plus},
+		//{src: path + 'lib/loaders/GLTFLoaderNew.js' + plus},
+
+
+
+		{src: path + 'php/Php.js' + plus},
+		{src: path + 'libMy/utility/Calc.js' + plus},
+		{src: path + 'libMy/utility/Rectangle.js' + plus},
+		{src: path + 'libMy/pl102/build/pl102.js' + plus},	
+
+
+		{src: path + 'admin/menu/GalleryXZ.js' + plus},
+		{src: path + 'libMy/DragPic.js' + plus},
+
+
+		{src: path + 'admin/menu/MBPic.js' + plus},
+		{src: path + 'admin/menu/MatBD.js' + plus},
+		{src: path + 'admin/menu/MatObject.js' + plus},
+
+		{src: path + 'admin/menu/filt/MFilt.js' + plus},
+		{src: path + 'admin/menu/filt/MText.js' + plus},
+		{src: path + 'admin/menu/dopInfa/DopInfo.js' + plus},
+
+		{src: path + 'admin/menu/MResurs.js' + plus},
+		{src: path + 'admin/menu/MinV3D.js' + plus},
+		{src: path + 'admin/menu/KorektTexture.js' + plus},
+		{src: path + 'admin/menu/KorektMaterial.js' + plus},
+		{src: path + 'admin/menu/CubeMap.js' + plus},
+		{src: path + 'admin/menu/DSettings.js' + plus},		
+		{src: path + 'admin/menu/MenuScene.js' + plus},
+		{src: path + 'admin/menu/MInfo.js' + plus},
+		{src: path + 'admin/menu/MenuBD.js' + plus},
+		{src: path + 'admin/menu/MenuObject.js' + plus},
+		{src: path + 'admin/menu/MenuThree.js' + plus},
+		{src: path + 'admin/menu/MenuVerh.js' + plus},
+		{src: path + 'admin/menu/Menu.js' + plus},
+		{src: path + 'admin/menu/NaObj.js' + plus},
+
+		{ src: path + 'admin/menu/TextureBD.js' + plus },
+
+
+
+		
+		{src: path + 'pm/pm.min.js' + plus},
+		//{src: path + 'pm/PM.js'},
+
+
+		
+
+		
+		
+
+		{src: path + 'admin/S3D.js' + plus},
+
+		{src: path + 'admin/menu/BoxHelper.js' + plus},
+
+		{src: path + 'libMy/visi3D/visi3D.min.js' + plus},
+		
+		{src: path + 'admin/AGlaf.js' + plus},
+		{src: path + 'admin/AMain.js' + plus},
+
+
+		
+	];
+	var lMain
+	function sizeWindow () {
+		var w = document.documentElement.clientWidth;
+		var h = document.documentElement.clientHeight;
+		if(window.innerWidth!=undefined)w = window.innerWidth;
+		if(window.innerHeight!=undefined)h = window.innerHeight;
+		if (lMain) lMain.sizeWindow(w, h);		
+		if (appLoader) appLoader.sizeWindow(w,h);
+	}
+
+
+	/*function init () {
+		var sss
+		$.ajax({
+            url: "resources/info.json?"+Math.random(),
+            success: function function_name(data) {                         
+                if(typeof data === "string") {
+					var conf = JSON.parse(data)
+					sss = conf;
+				} else sss = data;
+				initTest(sss.sah)                           
+            },
+            error:function function_name(data) {
+                console.log("Что то случилось с конфигом")
+            }
+        }); 
+	}*/
+
+	function init (num) {
+		var b=true;
+		var object = window.localStorage["xzxz"];
+		if(object == "undefined")b=false;
+		if(object == undefined)b=false;
+
+		// проверка пуст ли  localStorage
+		if(b == false) {
+			object = {sah:-1}; // если localStorage пуст, записываем обьект с функции getStartObj
+		}else {
+			object = jQuery.parseJSON(object); // если localStorage не пуст записываем содержимое предварительно
+		}
+		sahBig=num;
+		
+		if(object.sah==num)	{			
+			init2();
+			return;
+		}		
+		plus ="?"+Math.random();
+		object.sah=num;
+		window.localStorage["xzxz"] = JSON.stringify(object);
+		init2();		
+	}
+
+
+
+	function init2 () {
+		
+		window.onresize = sizeWindow;		
+		appLoader = new AppLoader(
+			null,
+			'resources/image/pic3.png',
+			manifest,
+			function () {
+				
+				dcmParam = new DCM();	
+				
+				lMain=new AMain(function(s){
+					if(s=="init"){
+						appLoader.indicator.procent = 100;
+						sizeWindow()
+					}
+				})				
+				sizeWindow();				
+			},
+			null,
+			-85		
+		)
+
+
+		sizeWindow();
+		
+	}
+		
+
+</script></head><body onload="init()"></body></html>
