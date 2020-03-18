@@ -175,7 +175,12 @@ export class BVScane  {
             trace("this._activeObject  ",this._activeObject)
 
             if(this._activeObject!=-1){
-                this.fun("naMObj",this.arrStand[this._activeObject])
+                if(this.par && this.par.menu){
+                    this.par.menu.mObject.setObject(this.arrStand[this._activeObject])
+                    this.par.menu.index=1; 
+                }
+                
+               // this.fun("naMObj",this.arrStand[this._activeObject])
             }
            
         }

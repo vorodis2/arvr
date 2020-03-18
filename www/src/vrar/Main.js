@@ -23,7 +23,7 @@ export class Main  {
 		self.objectBase=null
 		self.confText=null 
         this.localStorage=undefined;
-        this.debug=false
+        this.debug=true
 		this.contentHTML= document.createElement('div');
 		this.contentHTML.style.position = 'fixed';
 		this.contentHTML.style.top = '0px';
@@ -35,7 +35,7 @@ export class Main  {
   		this.start = function () {	   
 			this.tick();            
             this.localStorage = new LocalStorage(null, "vrar");           
-            if(self.localStorage.object.debug==undefined)self.localStorage.object.debug=false            
+            if(self.localStorage.object.debug==undefined)self.localStorage.object.debug=true            
             this.debug=self.localStorage.object.debug;           
             this.fina();
 		};

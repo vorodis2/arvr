@@ -83,10 +83,12 @@ export class Glaf  {
         //this.visi3D.yVerh=-266
         
 
-        this.pm=new PM(this.visi3D, main.objectBase);
+        //this.pm=new PM(null, main.objectBase);
 
 
-        this.bvScane=new BVScane(this, this.pm, function(s,p){ 
+        this.bvScane=new BVScane(this, main.objectBase, this.visi3D)
+        this.bvScane.content3d.rotation.x=-Math.PI/2;
+        /*function(s,p){ 
             
 
             if(self.menu==undefined)return    
@@ -94,12 +96,12 @@ export class Glaf  {
                 self.menu.mObject.setObject(p)
                 self.menu.index=1;
             }
-        })
+        })*/
 
 
 
 
-        if(this.debug==true){
+        if(this.debug == true){
             this.menu=new Menu(this,function(s,p){  
 
                 if(s=="index"){
@@ -124,8 +126,6 @@ export class Glaf  {
             this.visi3D.yVerh=-190;           
             this.visi3D.zume=30;
             this.visi3D.rotationX=1.5
-
-
         }
 
         
