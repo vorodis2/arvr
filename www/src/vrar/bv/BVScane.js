@@ -43,6 +43,33 @@ export class BVScane  {
         this.arrVideo=[]; 
         this.arrStand=[]; 
 
+
+
+        this.isMobile = {
+            Android: function () {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function () {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function () {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function () {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function () {
+                return navigator.userAgent.match(/IEMobile/i);
+            },
+            any: function () {
+                return (self.isMobile.Android() || self.isMobile.BlackBerry() || self.isMobile.iOS() || self.isMobile.Opera() || self.isMobile.Windows());
+            }
+        };
+        this.mobile=false;
+        if(this.isMobile.any()!=null)this.mobile=true;
+
+       
+
         this.creatStand=function() {
             var stand=new BVStand(this);
             stand.idArr=this.arrStand.length;
@@ -103,21 +130,23 @@ export class BVScane  {
 
 
         this.mousedown=function(c){            
-            if(dcmParam.mobile==false){
+            if(self.mobile==false){
                 document.removeEventListener("mousedown", self.mousedown)
             }else{
                 document.removeEventListener("touchstart", self.mousedown)
             }
-            self.firstClick=true;
-            
+            self.firstClick=true;            
         }
 
 
-        if(dcmParam.mobile==false){
+        
+        if(this.mobile==false){
             document.addEventListener("mousedown", self.mousedown)
         }else{
             document.addEventListener("touchstart", self.mousedown)
-        }
+        }  
+        
+        
 
 
 
