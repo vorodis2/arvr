@@ -1,31 +1,42 @@
-
-
 const path = require('path');
 const webpack = require('webpack');
 const bodyParser = require('body-parser');
- let conf = {
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const root = path.resolve(__dirname, '.');
+const dest = path.resolve(__dirname, 'build');
+
+let conf = {
+	context: root,
   	entry: './src/index.js',
   	output: {
-    	path: path.resolve(__dirname, 'build'),
+		path: dest,
 		filename: 'build.js',
-		publicPath: 'build/'
+		hotUpdateChunkFilename: 'hot-update/hot-update.js',
+		hotUpdateMainFilename: 'hot-update/hot-update.json',
   	},
   	devServer: {       
         overlay: true,        
-    },  
+	},
+	resolve: {
+		extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
+	},
 	module: {
 		rules: [
-	      {
-	        test: /\.js$/,
-	        exclude: /node_modules/,
-	        use: {
-	          loader: "babel-loader"
-	        }
-	      }
-	    ]
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader"
+				}
+			}
+		]
 	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin(),
+		new HtmlWebpackPlugin({
+			template: './index.html',
+			filename: './index.html',
+		}),
     ],
 	devtool: 'eval-sourcemap'
 };

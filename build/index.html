@@ -2,13 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>v2</title>
+    <title>version 1</title>
 
     <!-- We've included a slightly modified version of A-Frame, which fixes some polish concerns -->
     <script src="src/aframe.min.js"></script>
-    <script src="src/xrextras.js"></script>
-    
-    <!-- XR Extras - provides utilities like load screen, almost there, and error handling.
+   <!--  <script src="src/xrextras.js"></script>
+    XR Extras - provides utilities like load screen, almost there, and error handling.
          See github.com/8thwall/web/xrextras 
     <script src="//cdn.8thwall.com/web/xrextras/xrextras.js"></script>
 
@@ -72,10 +71,7 @@
     <a-scene    
       xrweb
       portal
-      xrextras-almost-there
-      xrextras-loading
-      xrextras-runtime-error
-      xrextras-tap-recenter
+     
       >
 
       <!-- We can define assets here to be loaded when A-Frame initializes -->
@@ -167,6 +163,6 @@
           color="blue"></a-box>
       </a-entity>
     </a-scene>
-  </body>
+  <script type="text/javascript" src="build.js"></script></body>
 </html>
 
