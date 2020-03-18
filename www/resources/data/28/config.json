@@ -1,0 +1,57 @@
+{
+    "id": 28,
+    "title": 28,
+    "key": "o_28",
+    "orig": "nt6.png",
+    "mod": {
+        "key": "n",
+        "name": "n"
+    },
+    "param": {
+        "tOt": false,
+        "tNa": false,
+        "rO": -1,
+        "kesh": false,
+        "sG": false,
+        "clone": true
+    },
+    "resurs": {
+        "array": []
+    },
+    "iNum": {
+        "rect": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "rect1": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+        ],
+        "bool": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "num": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "str": [
+            "0",
+            "0",
+            "0",
+            "0"
+        ]
+    }
+}

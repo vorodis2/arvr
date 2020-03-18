@@ -1,0 +1,63 @@
+{
+    "id": 15,
+    "title": 15,
+    "key": "o_15",
+    "orig": "xz.png",
+    "mod": {
+        "key": "glb",
+        "name": "zad.glb"
+    },
+    "filt": [],
+    "param": {
+        "tOt": true,
+        "tNa": true,
+        "rO": -1,
+        "kesh": false,
+        "sG": false,
+        "clone": true
+    },
+    "resurs": {
+        "array": []
+    },
+    "iNum": {
+        "rect": [
+            -50,
+            0,
+            0,
+            100,
+            100,
+            0.2
+        ],
+        "rect1": [
+            -50,
+            0,
+            0,
+            100,
+            100,
+            0.2
+        ],
+        "bool": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "num": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "str": [
+            "0",
+            "0",
+            "0",
+            "0"
+        ]
+    },
+    "iz": {
+        "a": true,
+        "st": false,
+        "str": "[0,{|material|:|m_1|,|sah|:1}]"
+    }
+}

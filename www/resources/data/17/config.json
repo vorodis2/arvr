@@ -1,0 +1,58 @@
+{
+    "id": 17,
+    "title": 17,
+    "key": "o_17",
+    "orig": "xz.png",
+    "mod": {
+        "key": "glb",
+        "name": "pol.glb"
+    },
+    "filt": [],
+    "param": {
+        "tOt": false,
+        "tNa": true,
+        "rO": -1,
+        "kesh": false,
+        "sG": false,
+        "clone": true
+    },
+    "resurs": {
+        "array": []
+    },
+    "iNum": {
+        "rect": [
+            -35,
+            0,
+            -35,
+            70,
+            2,
+            70
+        ],
+        "rect1": [
+            -35,
+            0,
+            -35,
+            70,
+            2,
+            70
+        ],
+        "bool": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "num": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "str": [
+            "0",
+            "0",
+            "0",
+            "0"
+        ]
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "id": 14,
+    "title": 14,
+    "key": "o_14",
+    "orig": "xz.png",
+    "mod": {
+        "key": "glb",
+        "name": "noshka.glb"
+    },
+    "filt": [],
+    "param": {
+        "tOt": true,
+        "tNa": true,
+        "rO": -1,
+        "kesh": false,
+        "sG": false,
+        "clone": true
+    },
+    "resurs": {
+        "array": [
+            {
+                "name": "57_128.png",
+                "size": 1,
+                "b": false,
+                "i": "x",
+                "i1": "x"
+            }
+        ]
+    },
+    "psm": {
+        "p": [
+            0,
+            0,
+            0
+        ],
+        "r": [
+            0,
+            0,
+            0
+        ],
+        "s": [
+            100,
+            100,
+            100
+        ]
+    },
+    "iNum": {
+        "rect": [
+            -3,
+            0,
+            -3,
+            6,
+            100,
+            6
+        ],
+        "rect1": [
+            -3,
+            0,
+            -3,
+            6,
+            100,
+            6
+        ],
+        "bool": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "num": [
+            0,
+            0,
+            0,
+            0
+        ],
+        "str": [
+            "0",
+            "0",
+            "0",
+            "0"
+        ]
+    },
+    "iz": {
+        "a": true,
+        "st": false,
+        "str": "[0,0,{|material|:|m_11|,|sah|:2},{|material|:|m_11|,|sah|:3}]"
+    }
+}
