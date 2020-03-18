@@ -131,19 +131,22 @@ export class BVScane  {
 
         this.mousedown=function(c){            
             if(self.mobile==false){
-                document.removeEventListener("mousedown", self.mousedown)
+                document.removeEventListener("mouseup", self.mousedown)
             }else{
-                document.removeEventListener("touchstart", self.mousedown)
+                document.removeEventListener("touchend", self.mousedown)
             }
-            self.firstClick=true;            
+            setTimeout(function() {
+                self.firstClick=true;   
+            }, 1);
+                      
         }
 
 
         
         if(this.mobile==false){
-            document.addEventListener("mousedown", self.mousedown)
+            document.addEventListener("mouseup", self.mousedown)
         }else{
-            document.addEventListener("touchstart", self.mousedown)
+            document.addEventListener("touchend", self.mousedown)
         }  
         
         

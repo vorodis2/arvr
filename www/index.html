@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>v3</title>
+    <title>v4</title>
 
     <!-- We've included a slightly modified version of A-Frame, which fixes some polish concerns -->
     <script src='build/jquery-1.11.3.js'></script>
@@ -34,7 +34,7 @@
 
 	        $.ajax({
 	            url: "resources/config.json?x="+Math.random(),
-	            success: data=> { 
+	            success: data=> {
 	            
 
 	                if(typeof data === "string") {
@@ -55,9 +55,14 @@
 			this.contents.object3D.add(bvScane.content3d);
 			var s=0.01
 			bvScane.content3d.scale.set(s,s,s)
-			//let ss=   '{"arrVideo":[{"src":"resources/video/videoplayback.webm","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';	
-			let ss=   '{"arrVideo":[{"src":"resources/video/test.mp4","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';	
-				             
+			//let ss=   '{"arrVideo":[{"src":"resources/video/videoplayback.webm","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';
+
+			let ss=   '{"arrVideo":[{"src":"resources/video/tes1.mp4","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';	
+
+			korektTrace();
+			
+
+
 	        bvScane.setObj(JSON.parse(ss));
 
         },
@@ -83,9 +88,28 @@
           this.wasOutside = isOutside*/
         }
       })
+
+      function korektTrace () {
+			var textarea = document.createElement('textarea')
+			textarea.style.width=(150)+"px";
+			textarea.style.height=(150)+"px";
+			textarea.style.position = 'fixed';
+			textarea.style.top = '254px';
+			textarea.style.left = '0px';
+			textarea.style.fontSize = '12px';
+			document.body.appendChild(textarea)	
+			window.trace=function(s){			
+				textarea.value=s+"\n"+textarea.value
+			}
+		}
+
+
+
     </script>
 
   </head>
+  <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
   <body>
     <a-scene portal>
 
@@ -93,7 +117,7 @@
 
       <a-camera
         id="camera"
-        position="0 1.7 0"
+        position="0 1.7 3"
         fov="45"
       >
       </a-camera>
@@ -102,5 +126,6 @@
      
     </a-scene>
   </body>
+
 </html>
 
