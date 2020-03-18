@@ -4,7 +4,7 @@
     "key": "MeshPhongMaterial",
     "obj": {
         "type": "MeshPhongMaterial",
-        "color": "#ffffff",
+        "color": "#f4f4f4",
         "skinning": false,
         "flatShading": false,
         "depthFunc": 3,
@@ -20,17 +20,13 @@
             {
                 "id": "t_4",
                 "name": "map"
-            },
-            {
-                "id": "t_4",
-                "name": "bumpMap"
             }
         ],
         "emissive": "#000000",
         "specular": "#111111",
         "shininess": 0
     },
-    "mirro": 1,
+    "mirro": 0,
     "resurs": {
         "array": []
     },

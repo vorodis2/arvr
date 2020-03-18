@@ -431,7 +431,7 @@ class BVZad  {
             this.arrC3D[2].scale.set(s,s,s);
             this.arrC3D[1].position.x=this._width/2-this._otLeft;
             this.arrC3D[2].position.x=-this._width/2+this._otLeft;
-            this.arrC3D[1].position.z=this.arrC3D[2].position.z=0.5*s;
+            this.arrC3D[1].position.z=this.arrC3D[2].position.z=0.5*s*3;
         }
 
 

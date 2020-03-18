@@ -19,15 +19,7 @@
         "specular": "#050505",
         "emissive": "#070707",
         "shininess": 131.07,
-        "textur": [
-            {
-                "link": "resources/data/m_22/textur/normal2.jpg",
-                "l": "normal2.jpg",
-                "name": "normalMap",
-                "rx": "10",
-                "ry": "10"
-            }
-        ]
+        "textur": []
     },
     "mirro": 0,
     "resurs": {

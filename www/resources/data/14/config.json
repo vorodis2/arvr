@@ -17,15 +17,7 @@
         "clone": true
     },
     "resurs": {
-        "array": [
-            {
-                "name": "57_128.png",
-                "size": 1,
-                "b": false,
-                "i": "x",
-                "i1": "x"
-            }
-        ]
+        "array": []
     },
     "psm": {
         "p": [
@@ -83,6 +75,6 @@
     "iz": {
         "a": true,
         "st": false,
-        "str": "[0,0,{|material|:|m_11|,|sah|:2},{|material|:|m_11|,|sah|:3}]"
+        "str": "[0,{|scale|:{|x|:2,|y|:1,|z|:2},|sah|:1},{|scale|:{|x|:1,|y|:5,|z|:1},|material|:|m_1|,|sah|:2},{|position|:{|x|:0,|y|:0,|z|:0.1},|material|:|m_1|,|sah|:3}]"
     }
 }
