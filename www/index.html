@@ -22,90 +22,49 @@
 
     <script>
       var trace = window.console.log.bind(window.console);
-
-      // This component gives the invisible hider walls the property they need
-      AFRAME.registerComponent('hider-material', {
-        init: function() {
-          const mesh = this.el.getObject3D('mesh')
-          mesh.material.colorWrite = false
-        },
-      })
-
-      // This component hides and shows certain elements as the camera moves
       AFRAME.registerComponent('portal', {
         schema: {
           width: {default: 4},
           height: {default: 6},
           depth: {default: 1},
         },
-        init: function(){
-          /*this.camera = document.getElementById('camera')
-          this.contents = document.getElementById('portal-contents')
-          this.walls = document.getElementById('hider-walls')
-          this.portalWall = document.getElementById('portal-wall')
-          this.portalWorld = document.getElementById('portal-world')
-          this.isInPortalSpace = false
-          this.wasOutside = true*/
+        init: function() {
           this.contents = document.querySelector("a-scene")
+          const self = this
           $.ajax({
-	            url: "resources/config.json?x="+Math.random(),
-	            success: data=> {
-	            
+            url: "resources/config.json?x="+Math.random(),
+            success: data=> {
+              if(typeof data === "string") {
+                var objectBase = JSON.parse(data)
+              } else {
+                var objectBase = data;
+              }
+              load(objectBase);
+            },
+            error:function function_name(data) {
+              console.log("Что то случилось с конфигом")
+            }
+          });
+          function load(objectBase) {
+            var bvScane = new BVScane(null,objectBase, null); 
+            self.contents.object3D.add(bvScane.content3d);
+            var s=0.01
+            bvScane.content3d.scale.set(s,s,s)
+            //let ss=   '{"arrVideo":[{"src":"resources/video/videoplayback.webm","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';
 
-	                if(typeof data === "string") {
-						var objectBase = JSON.parse(data)				
-					} else var objectBase = data;
+            let ss=   '{"arrVideo":[{"src":"resources/video/tes1.mp4","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';	
 
-								
-					this.load2(objectBase);                                
-	            },
-	            error:function function_name(data) {
-	                console.log("Что то случилось с конфигом")
-	            }
-	        });
-        },
-        load2: function(objectBase){
-          var bvScane = new BVScane(null,objectBase, null); 
-          this.contents.object3D.add(bvScane.content3d);
-          var s=0.01
-          bvScane.content3d.scale.set(s,s,s)
-          //let ss=   '{"arrVideo":[{"src":"resources/video/videoplayback.webm","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';
-
-          let ss=   '{"arrVideo":[{"src":"resources/video/tes1.mp4","active":true},{"src":"resources/video/test.mp4","active":true}],"arrStand":[{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.66,"y":0,"w":0.3400000000000001,"h":1,"width":800,"height":300,"px":400,"py":0,"pz":-25,"pr":90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":-400,"py":0,"pz":-25,"pr":-90},{"indexVideo":0,"otUp":8,"otLeft":20,"x":0.33000000000000007,"y":0,"w":0.33000000000000007,"h":1,"width":800,"height":300,"px":0,"py":0,"pz":-425,"pr":180},{"indexVideo":1,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":72.023,"py":0,"pz":467.429,"pr":44.045},{"indexVideo":0,"otUp":20,"otLeft":20,"x":0,"y":0,"w":1,"h":1,"width":100,"height":100,"px":-48.103,"py":0,"pz":505.653,"pr":0}]}';	
-
-	        bvScane.setObj(JSON.parse(ss));
-        },
-        tick: function() {
-          /*const position = this.camera.object3D.position
-
-          const isOutside = position.z  > this.data.depth / 2
-          const withinPortalBounds =
-            position.y < this.data.height && Math.abs(position.x) < this.data.width / 2
-
-          if (this.wasOutside != isOutside && withinPortalBounds) {
-            this.isInPortalSpace = !isOutside
+            bvScane.setObj(JSON.parse(ss));
           }
-
-          this.contents.object3D.visible = this.isInPortalSpace || isOutside
-          this.walls.object3D.visible = !this.isInPortalSpace && isOutside
-          this.portalWall.object3D.visible = this.isInPortalSpace && !isOutside
-          this.portalWorld.object3D.visible = this.isInPortalSpace
-
-          this.wasOutside = isOutside*/
-        }
+        },
       })
-
     </script>
 
   </head>
   <body>
     <a-scene
-      xrweb
       portal
-      xrextras-almost-there
-      xrextras-loading
-      xrextras-runtime-error
-      xrextras-tap-recenter>
+    >
 
       <a-camera
         id="camera"
@@ -116,5 +75,22 @@
 
       
     </a-scene>
+
+    <script>
+      window.onload = () => {
+        if( XR8.XrDevice.isDeviceBrowserCompatible() ) {
+          const scene = document.querySelector('a-scene')
+          scene.setAttribute('xrweb', '')
+          scene.setAttribute('xrextras-tap-recenter', '')
+        }
+      }
+    </script>
   </body>
 </html>
+<!-- 
+  xrweb
+      xrextras-almost-there
+      xrextras-loading
+      xrextras-runtime-error
+      xrextras-tap-recenter
+ -->
