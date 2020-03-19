@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const bodyParser = require('body-parser');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const root = path.resolve(__dirname, '.');
-const dest = path.resolve(__dirname, 'docs');
+const dest = path.resolve(__dirname, 'build');
 
 let conf = {
 	context: root,
