@@ -61,8 +61,7 @@ export class IMenu  {//default
 
             
             video.onloadedmetadata = function(e) {
-                trace("@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-                trace(video.videoWidth+"@@@@@@@@@@@@@@@@@@@@@@@@@@@"+video.videoHeight)
+                
                 
                 canvas = document.createElement('canvas'); // канвас для картинки                
                 canvas.width=video.videoWidth;
