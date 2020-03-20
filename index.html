@@ -31,11 +31,11 @@
 
         import { IMenu } from './src/vrar/menuIndex/IMenu.js';
 
-      window.trace = window.console.log.bind(window.console);
+        window.trace = window.console.log.bind(window.console);
      
 
 
-      window.sizeWindow  = function() {
+        window.sizeWindow  = function() {
             var w = document.documentElement.clientWidth;
             var h = document.documentElement.clientHeight;
             if(window.innerWidth!=undefined)w = window.innerWidth;
@@ -43,23 +43,28 @@
             if(menu!=undefined)menu.sizeWindow(w,h,1);
         }
 
-      window.korektTrace = function() {
-          var textarea = document.createElement('textarea')
-          textarea.style.width=(150)+"px";
-          textarea.style.height=(250)+"px";
-          textarea.style.position = 'fixed';
-          textarea.style.top = '254px';
-          textarea.style.left = '0px';
-          textarea.style.fontSize = '12px';
-          document.body.appendChild(textarea) 
-          window.trace=function(s){           
-              textarea.value=s+"\n"+textarea.value
-          }
-      }
+        window.korektTrace = function() {
+            var textarea = document.createElement('textarea')
+            textarea.style.width=(150)+"px";
+            textarea.style.height=(250)+"px";
+            textarea.style.position = 'fixed';
+            textarea.style.top = '254px';
+            textarea.style.left = '0px';
+            textarea.style.fontSize = '12px';
+            document.body.appendChild(textarea) 
+            window.trace=function(s){           
+                textarea.value=s+"\n"+textarea.value
+            }
+        }
+
+        korektTrace()
 
 
 
       var menu=undefined;
+
+
+
       AFRAME.registerComponent('portal', {
         schema: {
           width: {default: 4},
@@ -70,9 +75,9 @@
           this.contents = document.querySelector("a-scene")
           this.camera = document.getElementById('camera').object3D
           const self = this
-          //korektTrace()
-          trace("1")  
           
+          
+          trace("-2-")
             
           function load(objectBase) {
             var bvScane = new BVScane(null,objectBase, null); 
@@ -116,15 +121,28 @@
           if(this.camera.position.x<-2.5)this.camera.position.x=-2.5 */ 
         }
       })
-      
+      //document.onload = () => {
+        
+     // }
+
+      window.onload = () => {
+       // setTimeout(function() {
+            if( XR8.XrDevice.isDeviceBrowserCompatible() ) {
+                trace("-3-")
+                const scene = document.querySelector('a-scene');
+                scene.setAttribute('xrweb', '');
+                scene.setAttribute('xrextras-tap-recenter', '');
+            }
+
+        //}, 3000);/**/
+        
+      }
       
     </script>
 
   </head>
   <body>
-    <a-scene
-      portal
-    >
+    <a-scene>
 
       <a-camera
         id="camera"
@@ -136,19 +154,10 @@
       
     </a-scene>
 
-    <script>
-      window.onload = () => {
-       // setTimeout(function() {
-            if( XR8.XrDevice.isDeviceBrowserCompatible() ) {
-              const scene = document.querySelector('a-scene');
-              scene.setAttribute('xrweb', '');
-              scene.setAttribute('xrextras-tap-recenter', '');
-            }
-
-        //}, 3000);/**/
-        
-      }
-    </script>
+  <script>
+    
+    document.querySelector("a-scene").setAttribute('portal', ''); 
+  </script>
   </body>
 </html>
 <!-- 
