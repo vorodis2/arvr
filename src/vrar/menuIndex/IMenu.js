@@ -9,7 +9,7 @@ export class IMenu  {//default
   		var self=this;
         this.objectBase=objectBase;
         this.fun=fun;
-        window.dcmParam=window.dcmParam = new DCM();//интерфейс
+        if(!window.dcmParam)window.dcmParam = new DCM();//интерфейс
         //dcmParam.fontSize=10;
 
         this.dCont = new DCont(document.body); 
@@ -19,6 +19,8 @@ export class IMenu  {//default
         this.array[0] = this.mHelp=new MHelp(this,function(s,p){
 
         });
+
+        this.array[1] = this.mScenePos = new MScenePos(this, (s, p) => {})
 
 
 
@@ -34,70 +36,11 @@ export class IMenu  {//default
         this.setHelp = function(arr){ 
             this.mHelp.setHelp(arr)
         }
-        var canvas,ctx,video;
-        this.testV = function(link){ 
-            
-
-            video = document.createElement('video');
-            video.preload = 'auto';
-            video.autoload = true;
-            video.autoplay = true;
-            video.loop = true;
-            video.src = link;
-
-
-            this.window=new DWindow(this.dCont,300,220,"testV");
-            
-            var dC1 = new DCont(this.window.content); 
-            dC1.scale=0.2
-            var dC = new DCont(dC1);             
-            dC.div.appendChild(video); 
-
-
-            setTimeout(function() {
-                video.play()
-                var t=new DLabel(self.window,0,-50,video.videoWidth+"  "+video.videoHeight)
-            }, 2000);
-
-            
-            video.onloadedmetadata = function(e) {
-                
-                
-                canvas = document.createElement('canvas'); // канвас для картинки                
-                canvas.width=video.videoWidth;
-                canvas.height=video.videoHeight;
-                ctx = canvas.getContext('2d')
-
-                var dC2 = new DCont(dC1);
-                dC2.y = video.videoHeight;           
-                dC2.div.appendChild(video);
-            }
-
-
-
-           
-
-
-
-        }
+       
 
         
         this.tick = function(){ 
-            if(canvas){
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                /*s=canvas.width/_w;
-                s1=canvas.height/_h;
-                if(s1>s)ss=s1;
-                else ss=s;
-                //ss*=0.8
-
-                x1=_w*ss;
-                y1=_h*ss;
-
-                x2=(this.canvas.width-x1)/2
-                y2=(this.canvas.height-y1)/2  */          
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-            }
+            
         }
 
 
@@ -134,16 +77,18 @@ export class MTV  {
 
         this.init=function(){
             this.window=new DWindow(this.dCont,300,220,"MTV");
-
-            var input= new DInput(this.window.content,5,5,"resources/video/videoplayback.webm")
+           //"https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4"
+            //"resources/tes1.mp4"
+            var input= new DInput(this.window.content,5,5,"https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4")
             input.width=300
 
-            var chek= new DButton(this.window.content,5,35,"test",function(){
-                bvScane.setVideo(input.text);
+            var chek= new DCheckBox(this.window.content,115,35,"canvas",function(){
+                
             })
+            chek.value=true
 
             var bat= new DButton(this.window.content,5,35,"test",function(){
-                bvScane.setVideo(input.text);
+                bvScane.setVideo(input.text, chek.value);
             })
 
 
@@ -319,4 +264,64 @@ export class MHBlok  {
         }
     }    
     get active() { return  this._active;} 
+}
+
+export class MScenePos {
+    constructor(par, fun) {
+        this.type = 'MScenePos'
+        this.par = par
+        this.fun = fun
+        this.content3d = null
+        this.scene = null
+        this.margin = 2
+        // const facingInside = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, 0))
+        // const facingOutside = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, Math.PI / 10, 0))
+        // const facingFar = new THREE.Quaternion().setFromEuler(new THREE.Euler(0, 0, 0))
+
+        this.dCont = new DCont(this.par.dCont)
+        this.buttonInside = new DButton(this.dCont, this.margin, this.margin, 'inside', () => {
+            this.content3d.position.set(0, 0, 0)
+            this.content3d.rotation.set(0, 0, 0)
+
+            this.scene.emit('recenter', /*{
+                origin: {x: 0, y: 0, z: 0},
+                facing: facingInside,
+            }*/)
+        })
+        this.buttonOutside = new DButton(this.dCont, this.margin, 0, 'outside', () => {
+            this.content3d.position.set(1, 0, -6.5)
+            this.content3d.rotation.set(0, Math.PI / 10, 0)
+
+            this.scene.emit('recenter', /*{
+                origin: {x: 2, y: 0, z: -6.5},
+                facing: facingOutside,
+            }*/)
+            // this.camera.rotation.set(0, Math.PI / 10, 0)
+        })
+        this.buttonFar = new DButton(this.dCont, this.margin, 0, 'far', () => {
+            this.content3d.position.set(10, 1, -90)
+            this.content3d.rotation.set(Math.PI / 4, Math.PI / 8, 0)
+            
+            this.scene.emit('recenter', /*{
+                origin: {x: 0, y: 0, z: 0},
+                facing: facingFar,
+            }*/)
+
+            this.tweenPosition.to({x: 1, y: 0, z: -6.5},3000).start()
+            this.tweenRotation.to({x: 0, y: Math.PI / 10, z: 0},3000).start()
+        })
+
+        this.buttonOutside.y = this.buttonInside.y + this.buttonInside.height + this.margin
+        this.buttonFar.y = this.buttonOutside.y + this.buttonOutside.height + this.margin
+    }
+
+    set3d(content3d, scene) {
+        this.content3d = content3d
+        this.tweenPosition = new TWEEN.Tween(this.content3d.position)
+        this.tweenRotation = new TWEEN.Tween(this.content3d.rotation)
+        // this.tweenPosition.onComplete(() => {
+        //     this.scene.emit('recenter')
+        // })
+        this.scene = scene
+    }
 }

@@ -10,7 +10,7 @@ export class BVVideo  {
         this._active=false; 
 
         this._firstClick= this.par._firstClick;
-
+        this._bCanvas = false;
 
 
         this.video = document.createElement('video');
@@ -20,13 +20,49 @@ export class BVVideo  {
         this.video.loop = true;
         this.video.crossOrigin = "Anonymous"
 
-        this.texture = new THREE.VideoTexture( this.video );
-        this.texture.minFilter = THREE.LinearFilter;
-        this.texture.magFilter = THREE.LinearFilter;
-        this.texture.format = THREE.RGBFormat;
-       // this.texture.needsUpdate = true;
 
-        this.material=new THREE.MeshPhongMaterial({color:0xffffff, map:this.texture})
+        var dC1 = new DCont(this.par.dCont); 
+            dC1.scale=0.2
+            var dC = new DCont(dC1);             
+            dC.div.appendChild(this.video); 
+
+        this.texture = undefined 
+        this.material= undefined 
+        
+        this.canvas = undefined; 
+        this.ctx = undefined; 
+
+
+        this.creatCanvas=function(){
+            if(this.canvas!=undefined)return
+
+
+            trace("@@@@@@@@@@@creatCanvas@@@@@@@@@@")
+
+            this.canvas = document.createElement('canvas'); // канвас для картинки                
+                //canvas.width=video.videoWidth;
+                //canvas.height=video.videoHeight;
+            this.ctx = this.canvas.getContext('2d');
+
+
+            
+            this.texture = new THREE.CanvasTexture( this.canvas );
+            this.texture.minFilter = THREE.LinearFilter;
+            this.texture.magFilter = THREE.LinearFilter;
+            this.texture.format = THREE.RGBFormat;
+            this.texture.needsUpdate = true;
+
+            this.material=new THREE.MeshPhongMaterial({color:0xffffff, map:this.texture})
+
+        } 
+
+
+        this.video.onloadedmetadata = function(e) {
+            if(self.canvas){
+                self.canvas.width=self.video.videoWidth;
+                self.canvas.height=self.video.videoHeight;                
+            }
+        }
 
 
 
@@ -35,10 +71,25 @@ export class BVVideo  {
             this.texture.dispose() 
             delete  this.video         
         }
-
+        this.dragCan=false   
         this.update = function () {
-            if(this._active==false)return            
-               
+            
+            if(this._active==false)return 
+            if(this._bCanvas != true) return          
+            if(this.dragCan == false) return 
+
+            trace(self.canvas.width+"   "+self.canvas.height)
+            self.ctx.clearRect(0, 0, self.canvas.width, self.canvas.height); 
+            self.ctx.drawImage(self.video, 0, 0, self.canvas.width, self.canvas.height); 
+
+
+            self.ctx.rect(Math.random()*self.canvas.width, Math.random()*self.canvas.height, 100, 100);    
+
+            
+            //self.ctx.fill();
+
+            self.texture.needsUpdate = true;
+            trace("--")   
         }
 
 
@@ -49,11 +100,41 @@ export class BVVideo  {
             return o;
         }
 
-        this.setObj=function(o) {  
+        this.setObj=function(o) { 
+            this.bCanvas = o.bCanvas;
             this.src = o.src;
-            this.active = o.active;    
+            this.active = o.active;                
         }
     }
+
+
+    set bCanvas(value) {
+        trace(this._bCanvas+">>",value)   
+        //if(this._bCanvas!=value){         
+            this._bCanvas= value; 
+            if(this._bCanvas==true){
+                this.creatCanvas() 
+            }
+            else{
+
+                this.texture = new THREE.VideoTexture( this.video );
+                this.texture.minFilter = THREE.LinearFilter;
+                this.texture.magFilter = THREE.LinearFilter;
+                this.texture.format = THREE.RGBFormat;
+                //this.texture.needsUpdate = true;
+
+                this.material=new THREE.MeshPhongMaterial({color:0xffffff, map:this.texture})
+                
+                //this.material.map=this.texture
+            } 
+
+
+                   
+        //}
+    }    
+    get bCanvas() { return  this._bCanvas;}
+
+
 
     set firstClick(value) {
         if(this._firstClick!=value){         
@@ -80,10 +161,11 @@ export class BVVideo  {
 
             if(this._firstClick==false)return
 
-            this.texture.needsUpdate = value;
+           // this.texture.needsUpdate = value;
 
             if(value==true){
                 this.video.play()
+                this.dragCan=true                
             }else{
                 this.video.pause()
             }

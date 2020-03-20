@@ -55,11 +55,12 @@
             }
         }
 
-        korektTrace()
+       // korektTrace()
         trace("v222")
 
          
         var menu=undefined;
+        var bvScane=undefined;
 
         window.boolLoad=false 
         window.init=function(){
@@ -87,27 +88,29 @@
                     trace("-2-")
                     
                     function load(objectBase) {
-                        var bvScane = new BVScane(null,objectBase, null); 
+                        bvScane = new BVScane(null,objectBase, null); 
                         self.contents.object3D.add(bvScane.content3d);
                         var s=0.01
 
                         bvScane.content3d.scale.set(s,s,s);
 
-                        bvScane.setVideo("resources/tes1.mp4");
-                        //bvScane.setVideo("resources/video/videoplayback.webm");
-                        //bvScane.setVideo("https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4");
+                        //bvScane.setVideo("resources/tes1.mp4");
+                        
+                        bvScane.setVideo("https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4");
 
-            /*
+            
                         menu=new IMenu( objectBase, function(s,p){
 
                         })
-                        menu.setHelp([
+                        menu.mScenePos.set3d(bvScane.content3d, self.contents)
+                       /* menu.setHelp([
                           "resources/help.png",
                           "resources/help1.png"
                         ])*/
                         //menu.mTV.setBV(bvScane)
-                       // menu.testV("https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4")
-                        //menu.testV("resources/video/videoplayback.webm")
+                       // bvScane.testV("https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4")
+                      //// bvScane.testV("resources/tes1.mp4")
+                       
                         window.onresize = sizeWindow;
                         sizeWindow()
                     
@@ -118,6 +121,7 @@
                 tick: function() {
                     this.camera.position.y=1.7
                     if(menu)menu.tick();
+                    if(bvScane)bvScane.update()
                 }
             }) 
 
@@ -141,6 +145,7 @@
 
   </head>
   <body>
+    <video id="video" autoplay playsinline></video> 
     <a-scene>
 
       <a-camera
@@ -154,7 +159,7 @@
     </a-scene>
 
   <script>
-    window.init()   
+    if(window.init)window.init()   
     
   </script>
   </body>
