@@ -21,10 +21,10 @@ export class BVVideo  {
         this.video.crossOrigin = "Anonymous"
 
 
-        var dC1 = new DCont(this.par.dCont); 
+       /* var dC1 = new DCont(this.par.dCont); 
             dC1.scale=0.2
             var dC = new DCont(dC1);             
-            dC.div.appendChild(this.video); 
+            dC.div.appendChild(this.video); */
 
         this.texture = undefined 
         this.material= undefined 

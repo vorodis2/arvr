@@ -95,18 +95,17 @@
                         bvScane.content3d.scale.set(s,s,s);
 
                         //bvScane.setVideo("resources/tes1.mp4");
-                        
-                        bvScane.setVideo("https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4");
+                        bvScane.setVideo("resources/bravo_video.mp4");
+                       // bvScane.setVideo("https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4");
 
             
                         menu=new IMenu( objectBase, function(s,p){
 
                         })
                         menu.mScenePos.set3d(bvScane.content3d, self.contents)
-                       /* menu.setHelp([
-                          "resources/help.png",
-                          "resources/help1.png"
-                        ])*/
+                        menu.setHelp([
+                          "resources/help.png"
+                        ])/**/
                         //menu.mTV.setBV(bvScane)
                        // bvScane.testV("https://vto.s3-us-west-2.amazonaws.com/bravo_video.mp4")
                       //// bvScane.testV("resources/tes1.mp4")
